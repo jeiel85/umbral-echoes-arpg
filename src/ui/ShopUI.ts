@@ -22,20 +22,20 @@ export class ShopUI extends Phaser.GameObjects.Container {
     const pW = 540;
     const pH = 440;
 
-    // Background
+    // Background (100% opaque)
     const bg = scene.add.graphics();
-    bg.fillStyle(0x0f1117, 0.96);
+    bg.fillStyle(0x0a0c10, 1.0);
     bg.fillRect(-pW / 2, -pH / 2, pW, pH);
-    bg.lineStyle(3, 0x473d31, 0.95);
+    bg.lineStyle(3, 0x473d31, 1.0);
     bg.strokeRect(-pW / 2, -pH / 2, pW, pH);
-    bg.lineStyle(1, 0xb45309, 0.8);
+    bg.lineStyle(1, 0xb45309, 0.9);
     bg.strokeRect(-pW / 2 + 4, -pH / 2 + 4, pW - 8, pH - 8);
     this.add(bg);
 
     // Title
-    this.titleText = scene.add.text(0, -pH / 2 + 20, 'MERCHANT BAZAAR', {
-      fontFamily: 'serif',
-      fontSize: '17px',
+    this.titleText = scene.add.text(0, -pH / 2 + 20, '상점 (MERCHANT)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '16px',
       fontStyle: 'bold',
       color: '#fbbf24',
       stroke: '#000',
@@ -45,8 +45,8 @@ export class ShopUI extends Phaser.GameObjects.Container {
     this.add(this.titleText);
 
     // Tip: Click inventory items to sell
-    const tip = scene.add.text(0, pH / 2 - 25, '💡 Tip: Click items in your Inventory to sell them for Gold.', {
-      fontFamily: 'sans-serif',
+    const tip = scene.add.text(0, pH / 2 - 25, '💡 팁: 가방의 아이템을 클릭하면 상점에 판매할 수 있습니다.', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       color: '#9ca3af',
     });
@@ -71,7 +71,7 @@ export class ShopUI extends Phaser.GameObjects.Container {
   }
 
   public openShop(merchantType: 'blacksmith' | 'alchemist') {
-    this.titleText.setText(merchantType === 'blacksmith' ? 'VALERIUS THE BLACKSMITH' : 'MARA THE ALCHEMIST');
+    this.titleText.setText(merchantType === 'blacksmith' ? '대장장이 브론의 무기고' : '연금술사 엘레나의 물약상점');
     this.generateStock(merchantType);
     this.refreshUI();
     this.setVisible(true);
@@ -112,15 +112,15 @@ export class ShopUI extends Phaser.GameObjects.Container {
       else if (item.rarity === 'legendary') col = '#fb923c';
 
       const name = this.scene.add.text(-180, y - 10, `${item.name} (Lv.${item.level})`, {
-        fontFamily: 'serif',
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
         fontSize: '13px',
         fontStyle: 'bold',
         color: col,
       });
       this.itemsContainer.add(name);
 
-      const buyBtn = this.scene.add.text(140, y - 8, `Buy (🪙 ${price})`, {
-        fontFamily: 'serif',
+      const buyBtn = this.scene.add.text(130, y - 8, `구매 (${price} G)`, {
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
         fontSize: '12px',
         fontStyle: 'bold',
         color: this.player.inventory.gold >= price ? '#4ade80' : '#ef4444',

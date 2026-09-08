@@ -43,7 +43,7 @@ export class DamageNumberManager {
     }
 
     const txt = this.scene.add.text(x + offsetX, y + offsetY, String(text), {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize,
       fontStyle: type === 'crit' ? 'bold' : 'normal',
       color,

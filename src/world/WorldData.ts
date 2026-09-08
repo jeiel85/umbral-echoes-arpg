@@ -39,7 +39,7 @@ export interface AreaDefinition {
 export const AREAS: Record<string, AreaDefinition> = {
   town: {
     id: 'town',
-    name: 'Oakhaven Refuge',
+    name: '잿빛 안식처 (Oakhaven Refuge)',
     level: 1,
     floorTile: 'tile_town_floor',
     wallTile: 'tile_town_wall',
@@ -54,7 +54,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'outskirts',
         targetX: 80,
         targetY: 380,
-        label: 'To Ashen Outskirts',
+        label: '잿빛 외곽으로 ▶',
       },
     ],
     spawns: [],
@@ -69,7 +69,7 @@ export const AREAS: Record<string, AreaDefinition> = {
   },
   outskirts: {
     id: 'outskirts',
-    name: 'Ashen Outskirts',
+    name: '잿빛 외곽 (Ashen Outskirts)',
     level: 2,
     floorTile: 'tile_stone_floor',
     wallTile: 'tile_stone_wall',
@@ -84,7 +84,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'town',
         targetX: 900,
         targetY: 380,
-        label: 'To Oakhaven Refuge',
+        label: '◀ 잿빛 안식처(마을)로',
       },
       {
         x: 1450,
@@ -92,7 +92,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'graveyard',
         targetX: 80,
         targetY: 500,
-        label: 'To Cursed Graveyard',
+        label: '저주받은 묘지로 ▶',
       },
     ],
     spawns: [
@@ -119,7 +119,7 @@ export const AREAS: Record<string, AreaDefinition> = {
   },
   graveyard: {
     id: 'graveyard',
-    name: 'Cursed Graveyard',
+    name: '저주받은 묘지 (Cursed Graveyard)',
     level: 4,
     floorTile: 'tile_stone_floor',
     wallTile: 'tile_stone_wall',
@@ -136,7 +136,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'outskirts',
         targetX: 1400,
         targetY: 500,
-        label: 'To Ashen Outskirts',
+        label: '◀ 잿빛 외곽으로',
       },
       {
         x: 1450,
@@ -144,7 +144,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'swamp',
         targetX: 80,
         targetY: 550,
-        label: 'To Blighted Swampland',
+        label: '오염된 늪지대로 ▶',
       },
     ],
     spawns: [
@@ -170,7 +170,7 @@ export const AREAS: Record<string, AreaDefinition> = {
   },
   swamp: {
     id: 'swamp',
-    name: 'Blighted Swampland',
+    name: '오염된 늪지대 (Blighted Swampland)',
     level: 7,
     floorTile: 'tile_swamp_floor',
     wallTile: 'tile_swamp_wall',
@@ -185,7 +185,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'graveyard',
         targetX: 1380,
         targetY: 550,
-        label: 'To Cursed Graveyard',
+        label: '◀ 저주받은 묘지로',
       },
       {
         x: 1550,
@@ -193,7 +193,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'catacombs',
         targetX: 80,
         targetY: 550,
-        label: 'To Sunken Catacombs',
+        label: '가라앉은 지하묘지로 ▶',
       },
     ],
     spawns: [
@@ -218,7 +218,7 @@ export const AREAS: Record<string, AreaDefinition> = {
   },
   catacombs: {
     id: 'catacombs',
-    name: 'Sunken Catacombs',
+    name: '가라앉은 지하묘지 (Sunken Catacombs)',
     level: 10,
     floorTile: 'tile_stone_floor',
     wallTile: 'tile_stone_wall',
@@ -235,7 +235,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'swamp',
         targetX: 1480,
         targetY: 550,
-        label: 'To Blighted Swampland',
+        label: '◀ 오염된 늪지대로',
       },
       {
         x: 1550,
@@ -243,7 +243,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'abyss',
         targetX: 80,
         targetY: 600,
-        label: 'To Abyssal Citadel',
+        label: '심연의 성채로 ▶',
       },
     ],
     spawns: [
@@ -268,7 +268,7 @@ export const AREAS: Record<string, AreaDefinition> = {
   },
   abyss: {
     id: 'abyss',
-    name: 'Abyssal Citadel',
+    name: '심연의 성채 (Abyssal Citadel)',
     level: 13,
     floorTile: 'tile_abyss_floor',
     wallTile: 'tile_abyss_wall',
@@ -285,7 +285,7 @@ export const AREAS: Record<string, AreaDefinition> = {
         targetAreaId: 'catacombs',
         targetX: 1480,
         targetY: 600,
-        label: 'To Sunken Catacombs',
+        label: '◀ 가라앉은 지하묘지로',
       },
     ],
     spawns: [

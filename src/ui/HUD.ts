@@ -63,8 +63,9 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(hpFrame);
 
     this.hpText = scene.add.text(hgX, hgY, '100/100', {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '12px',
+      fontStyle: 'bold',
       color: '#ffffff',
       stroke: '#000000',
       strokeThickness: 3,
@@ -83,8 +84,9 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(resFrame);
 
     this.resText = scene.add.text(rgX, rgY, '100/100', {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '12px',
+      fontStyle: 'bold',
       color: '#ffffff',
       stroke: '#000000',
       strokeThickness: 3,
@@ -98,9 +100,9 @@ export class HUD extends Phaser.GameObjects.Container {
 
     // Background bar panel
     const barBg = scene.add.graphics();
-    barBg.fillStyle(0x0a0c12, 0.9);
+    barBg.fillStyle(0x0a0c12, 0.95);
     barBg.fillRect(centerX - 240, barY - 26, 480, 52);
-    barBg.lineStyle(2, 0x4a3e30, 0.9);
+    barBg.lineStyle(2, 0x4a3e30, 0.95);
     barBg.strokeRect(centerX - 240, barY - 26, 480, 52);
     this.add(barBg);
 
@@ -127,8 +129,9 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(this.xpFill);
 
     this.levelText = scene.add.text(centerX, H - 78, 'Lv. 1', {
-      fontFamily: 'serif',
-      fontSize: '13px',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '12px',
+      fontStyle: 'bold',
       color: '#facc15',
       stroke: '#000',
       strokeThickness: 3,
@@ -137,28 +140,29 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(this.levelText);
 
     // --- AREA & GOLD (Top Left) ---
-    this.areaText = scene.add.text(20, 20, 'Oakhaven Refuge', {
-      fontFamily: 'serif',
-      fontSize: '16px',
+    this.areaText = scene.add.text(20, 18, '잿빛 안식처 (Oakhaven Refuge)', {
+      fontFamily: "'Noto Sans KR', 'Cinzel', 'Segoe UI', sans-serif",
+      fontSize: '15px',
       fontStyle: 'bold',
-      color: '#f3f4f6',
+      color: '#facc15',
       stroke: '#000',
       strokeThickness: 3,
     });
     this.add(this.areaText);
 
-    this.goldText = scene.add.text(20, 44, '🪙 50 Gold', {
-      fontFamily: 'serif',
-      fontSize: '14px',
-      color: '#facc15',
+    this.goldText = scene.add.text(20, 42, '골드: 50 G', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '13px',
+      fontStyle: 'bold',
+      color: '#fbbf24',
       stroke: '#000',
       strokeThickness: 3,
     });
     this.add(this.goldText);
 
     // UI Hotkey tips
-    const tips = scene.add.text(20, 68, '[I] Inventory  [C] Character  [K] Skills  [ESC] Menu', {
-      fontFamily: 'sans-serif',
+    const tips = scene.add.text(20, 66, '[I] 가방/장비  [C] 캐릭터  [K] 스킬  [Tab] 미니맵  [ESC] 메뉴', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       color: '#9ca3af',
       stroke: '#000',
@@ -167,33 +171,35 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(tips);
 
     // --- QUEST TRACKER (Top Right) ---
-    const qx = W - 260;
-    const qy = 20;
+    const qx = W - 310;
+    const qy = 18;
 
     const questBg = scene.add.graphics();
-    questBg.fillStyle(0x0f1117, 0.85);
-    questBg.fillRect(qx - 10, qy - 8, 255, 75);
-    questBg.lineStyle(1, 0x473d31, 0.8);
-    questBg.strokeRect(qx - 10, qy - 8, 255, 75);
+    questBg.fillStyle(0x0f1117, 0.9);
+    questBg.fillRect(qx - 10, qy - 6, 300, 84);
+    questBg.lineStyle(1, 0x473d31, 0.9);
+    questBg.strokeRect(qx - 10, qy - 6, 300, 84);
     this.add(questBg);
 
-    this.questTitleText = scene.add.text(qx, qy, 'Main: The Vanishing Sentinel', {
-      fontFamily: 'serif',
+    this.questTitleText = scene.add.text(qx, qy, '사라진 파수꾼 (The Vanishing Sentinel)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '12px',
       fontStyle: 'bold',
       color: '#fbbf24',
       stroke: '#000',
       strokeThickness: 2,
+      wordWrap: { width: 280 },
     });
     this.add(this.questTitleText);
 
-    this.questProgressText = scene.add.text(qx, qy + 22, 'Slay Hollow Walkers: 0 / 6', {
-      fontFamily: 'serif',
+    this.questProgressText = scene.add.text(qx, qy + 20, '잿빛 외곽을 수색하여 배회하는 언데드 처치 (0 / 6)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       color: '#e2e8f0',
       stroke: '#000',
       strokeThickness: 2,
-      wordWrap: { width: 235 },
+      wordWrap: { width: 280 },
+      lineSpacing: 3,
     });
     this.add(this.questProgressText);
 
@@ -203,9 +209,9 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(this.bossContainer);
 
     const bBg = scene.add.graphics();
-    bBg.fillStyle(0x0a0a0c, 0.9);
+    bBg.fillStyle(0x0a0a0c, 0.92);
     bBg.fillRect(-220, -12, 440, 24);
-    bBg.lineStyle(2, 0xd97706, 0.9);
+    bBg.lineStyle(2, 0xd97706, 0.95);
     bBg.strokeRect(-220, -12, 440, 24);
     this.bossContainer.add(bBg);
 
@@ -213,7 +219,7 @@ export class HUD extends Phaser.GameObjects.Container {
     this.bossContainer.add(this.bossBarFill);
 
     this.bossNameText = scene.add.text(0, -25, 'Grave Lord Malakor', {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Cinzel', sans-serif",
       fontSize: '15px',
       fontStyle: 'bold',
       color: '#f87171',
@@ -232,7 +238,7 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(icon);
 
     const keyTxt = this.scene.add.text(x - 14, y - 18, keyLabel, {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '10px',
       fontStyle: 'bold',
       color: '#facc15',
@@ -242,7 +248,7 @@ export class HUD extends Phaser.GameObjects.Container {
     this.add(keyTxt);
 
     const countTxt = this.scene.add.text(x + 8, y + 6, '3', {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       fontStyle: 'bold',
       color: '#ffffff',
@@ -269,7 +275,7 @@ export class HUD extends Phaser.GameObjects.Container {
     this.slotCooldownGfx.set(slotKey, cdGfx);
 
     const lbl = this.scene.add.text(x - 16, y - 18, label, {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '10px',
       fontStyle: 'bold',
       color: '#facc15',
@@ -325,14 +331,14 @@ export class HUD extends Phaser.GameObjects.Container {
     this.xpFill.fillStyle(0xa855f7, 0.9);
     this.xpFill.fillRect(xpX, xpY, xpW * expRatio, 5);
 
-    this.levelText.setText(`Level ${p.level}`);
+    this.levelText.setText(`Lv. ${p.level}`);
 
     // Potion counts
     this.hpPotionCountText.setText(String(p.inventory.hpPotions));
     this.manaPotionCountText.setText(String(p.inventory.manaPotions));
 
     // Gold
-    this.goldText.setText(`🪙 ${p.inventory.gold} Gold`);
+    this.goldText.setText(`골드: ${p.inventory.gold} G`);
     this.areaText.setText(areaName);
 
     // Skill slots & cooldowns
@@ -362,24 +368,24 @@ export class HUD extends Phaser.GameObjects.Container {
     // Quest Tracker
     const q = this.questManager.getActiveMainQuest();
     if (q) {
-      this.questTitleText.setText(`Main: ${q.title}`);
+      this.questTitleText.setText(q.title);
       if (q.isCompleted) {
-        this.questProgressText.setText('Objective Complete! Talk to Elder Corvus.');
+        this.questProgressText.setText('★ 목표 완료! 마을의 장로 코르부스에게 보고하세요.');
         this.questProgressText.setColor('#4ade80');
       } else {
-        this.questProgressText.setText(`${q.description} (${q.currentCount}/${q.targetCount})`);
+        this.questProgressText.setText(`${q.description}\n[진행도: ${q.currentCount} / ${q.targetCount}]`);
         this.questProgressText.setColor('#e2e8f0');
       }
     } else {
-      this.questTitleText.setText('Campaign Completed!');
-      this.questProgressText.setText('All shadows dispelled.');
+      this.questTitleText.setText('모든 성전 완료!');
+      this.questProgressText.setText('어둠의 심연을 정화하고 세상을 구원했습니다.');
       this.questProgressText.setColor('#facc15');
     }
 
     // Boss Bar
     if (activeBoss && activeBoss.active && activeBoss.hp > 0) {
       this.bossContainer.setVisible(true);
-      this.bossNameText.setText(`${activeBoss.bossName} - ${activeBoss.bossTitle} (Phase ${activeBoss.phase})`);
+      this.bossNameText.setText(`${activeBoss.bossName} - ${activeBoss.bossTitle} (${activeBoss.phase}단계)`);
       this.bossBarFill.clear();
       const bRatio = Math.max(0, Math.min(1, activeBoss.hp / activeBoss.maxHp));
       this.bossBarFill.fillStyle(0xdc2626, 0.9);

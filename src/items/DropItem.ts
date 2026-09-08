@@ -25,12 +25,12 @@ export class DropItem extends Phaser.GameObjects.Container {
     if (item.type === 'gold') textColor = '#fbbf24';
 
     this.labelText = scene.add.text(0, -42, item.name, {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: rarity === 'legendary' ? '12px' : '11px',
       fontStyle: rarity === 'legendary' || rarity === 'rare' ? 'bold' : 'normal',
       color: textColor,
-      backgroundColor: 'rgba(5, 5, 8, 0.85)',
-      padding: { x: 4, y: 2 },
+      backgroundColor: 'rgba(5, 5, 8, 0.9)',
+      padding: { x: 5, y: 2 },
       stroke: '#000000',
       strokeThickness: 2,
     });

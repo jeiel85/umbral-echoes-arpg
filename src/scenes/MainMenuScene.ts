@@ -61,8 +61,8 @@ export class MainMenuScene extends Phaser.Scene {
     });
 
     // Game Title
-    const titleText = this.add.text(W / 2, 160, 'UMBRAL ECHOES', {
-      fontFamily: 'serif',
+    const titleText = this.add.text(W / 2, 155, 'UMBRAL ECHOES', {
+      fontFamily: "'Cinzel', serif",
       fontSize: '52px',
       fontStyle: 'bold',
       color: '#f8fafc',
@@ -72,8 +72,8 @@ export class MainMenuScene extends Phaser.Scene {
     });
     titleText.setOrigin(0.5, 0.5);
 
-    const subtitleText = this.add.text(W / 2, 220, '— FORSAKEN DEPTHS —', {
-      fontFamily: 'serif',
+    const subtitleText = this.add.text(W / 2, 215, '— FORSAKEN DEPTHS —', {
+      fontFamily: "'Cinzel', serif",
       fontSize: '20px',
       fontStyle: 'bold',
       color: '#fbbf24',
@@ -83,16 +83,18 @@ export class MainMenuScene extends Phaser.Scene {
     });
     subtitleText.setOrigin(0.5, 0.5);
 
-    const genreText = this.add.text(W / 2, 260, 'Dark Fantasy Hack & Slash ARPG', {
-      fontFamily: 'serif',
+    const genreText = this.add.text(W / 2, 255, '정통 다크 판타지 핵앤슬래시 ARPG', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '14px',
       color: '#94a3b8',
+      stroke: '#000',
+      strokeThickness: 2,
     });
     genreText.setOrigin(0.5, 0.5);
 
     // Menu Buttons Container
     const hasSave = SaveManager.hasSave();
-    const startY = 340;
+    const startY = 330;
     const spacingY = 55;
 
     const createButton = (
@@ -102,8 +104,8 @@ export class MainMenuScene extends Phaser.Scene {
       onClick: () => void
     ) => {
       const btn = this.add.text(W / 2, y, label, {
-        fontFamily: 'serif',
-        fontSize: '17px',
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+        fontSize: '15px',
         fontStyle: 'bold',
         color: enabled ? '#e2e8f0' : '#4b5563',
         backgroundColor: enabled ? '#181a24' : '#0d0e14',
@@ -132,13 +134,13 @@ export class MainMenuScene extends Phaser.Scene {
     };
 
     // 1. New Game
-    createButton('NEW CRUSADE', startY, true, () => {
+    createButton('새 여정 시작 (NEW GAME)', startY, true, () => {
       this.scene.start('CharacterSelectScene');
     });
 
     // 2. Continue
     const continueBtn = createButton(
-      hasSave ? 'CONTINUE VOYAGE' : 'CONTINUE (NO SAVE)',
+      hasSave ? '여정 이어하기 (CONTINUE)' : '여정 이어하기 (저장 없음)',
       startY + spacingY,
       hasSave,
       () => {
@@ -151,24 +153,24 @@ export class MainMenuScene extends Phaser.Scene {
 
     // 3. Settings / Audio
     const audioBtn = createButton(
-      'MUTE / UNMUTE AUDIO',
+      '음향 On / Off (SOUND)',
       startY + spacingY * 2,
       true,
       () => {
         const isMuted = SoundEngine.getInstance().toggleMute();
-        audioBtn.setText(isMuted ? 'AUDIO: MUTED' : 'AUDIO: ACTIVE');
+        audioBtn.setText(isMuted ? '음향: 음소거됨 (MUTED)' : '음향: 켜짐 (ACTIVE)');
       }
     );
 
     // 4. Credits & Lore
-    createButton('LORE & CREDITS', startY + spacingY * 3, true, () => {
+    createButton('게임 설명서 & 정보 (MANUAL)', startY + spacingY * 3, true, () => {
       this.showCreditsModal();
     });
 
     // 5. Reset Save
     if (hasSave) {
-      const resetBtn = this.add.text(W / 2, startY + spacingY * 4 + 10, '[ Reset Local Save ]', {
-        fontFamily: 'serif',
+      const resetBtn = this.add.text(W / 2, startY + spacingY * 4 + 10, '[ 저장 데이터 초기화 ]', {
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
         fontSize: '12px',
         color: '#f87171',
       });
@@ -176,7 +178,7 @@ export class MainMenuScene extends Phaser.Scene {
       resetBtn.setInteractive({ useHandCursor: true });
       resetBtn.on('pointerdown', () => {
         SaveManager.deleteSave();
-        resetBtn.setText('Save Erased.');
+        resetBtn.setText('저장 데이터가 삭제되었습니다.');
         continueBtn.setColor('#4b5563');
         continueBtn.setBackgroundColor('#0d0e14');
         continueBtn.disableInteractive();
@@ -185,7 +187,7 @@ export class MainMenuScene extends Phaser.Scene {
 
     // Version label
     const ver = this.add.text(W - 15, H - 15, 'v1.0.0 — Pure Client Web ARPG', {
-      fontFamily: 'sans-serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       color: '#64748b',
     });
@@ -199,13 +201,13 @@ export class MainMenuScene extends Phaser.Scene {
 
     const bg = this.add.graphics();
     bg.fillStyle(0x0a0c10, 0.98);
-    bg.fillRect(-300, -220, 600, 440);
+    bg.fillRect(-320, -220, 640, 440);
     bg.lineStyle(2, 0xd97706, 0.9);
-    bg.strokeRect(-300, -220, 600, 440);
+    bg.strokeRect(-320, -220, 640, 440);
     modal.add(bg);
 
-    const title = this.add.text(0, -180, 'UMBRAL ECHOES: FORSAKEN DEPTHS', {
-      fontFamily: 'serif',
+    const title = this.add.text(0, -180, '조작법 및 게임 안내 (GAME GUIDE)', {
+      fontFamily: "'Noto Sans KR', 'Cinzel', sans-serif",
       fontSize: '18px',
       fontStyle: 'bold',
       color: '#fbbf24',
@@ -216,34 +218,36 @@ export class MainMenuScene extends Phaser.Scene {
       0,
       -10,
       [
-        'A complete 2D Dark Gothic Fantasy Hack & Slash ARPG',
-        'Built with TypeScript, Vite, and Phaser 3.',
+        '◆ 조작 가이드 ◆',
+        '• 이동: WASD 또는 마우스 좌클릭 (원하는 위치 이동)',
+        '• 기본 공격: 마우스 좌클릭(LMB) / 우클릭(RMB)',
+        '• 스킬 시전: 숫자 키 1, 2, 3, 4',
+        '• 물약 사용: Q (생명력 물약) / E (마나 물약)',
+        '• 단축키: I (가방/장비), C (캐릭터 정보), K (스킬 트리), Tab (미니맵), ESC (메뉴)',
+        '• 상호작용: Space 키 또는 마우스 클릭 (NPC 대화, 상자 열기, 포탈 이동)',
         '',
-        '• Original universe, lore, enemies, bosses, and legendary gear.',
-        '• Web Audio API Procedural Sound Engine (zero external audio files).',
-        '• Procedural high-detail canvas pixel-art textures and animations.',
-        '• 100% Client-side with automatic localStorage save.',
-        '',
-        'Developed autonomously with utmost fidelity and care.',
-        'Enjoy your journey through the Forsaken Depths!',
+        '◆ 게임 특징 ◆',
+        '• 웹 브라우저에서 바로 실행되는 100% 클라이언트 다크 판타지 핵앤슬래시',
+        '• 2종 영웅 클래스(선봉장, 비전술사), 8종 고유 스킬, 8종 전설 유니크 아이템',
+        '• 10종 몬스터 및 정예 속성, 3종의 다단계 페이즈 보스 레이드',
       ].join('\n'),
       {
-        fontFamily: 'serif',
-        fontSize: '13px',
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+        fontSize: '12px',
         color: '#e2e8f0',
-        align: 'center',
-        lineSpacing: 6,
+        align: 'left',
+        lineSpacing: 5,
       }
     ).setOrigin(0.5, 0.5);
     modal.add(text);
 
-    const close = this.add.text(0, 175, '[ CLOSE ]', {
-      fontFamily: 'serif',
-      fontSize: '14px',
+    const close = this.add.text(0, 175, '[ 닫 기 (CLOSE) ]', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '13px',
       fontStyle: 'bold',
       color: '#fbbf24',
       backgroundColor: '#1f2937',
-      padding: { x: 16, y: 8 },
+      padding: { x: 18, y: 8 },
     }).setOrigin(0.5, 0.5);
     close.setInteractive({ useHandCursor: true });
     close.on('pointerdown', () => {

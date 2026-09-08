@@ -5,6 +5,9 @@
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
     <title>Umbral Echoes: Forsaken Depths | Dark Fantasy ARPG</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;900&family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet" />
     <style>
       * {
         box-sizing: border-box;
@@ -13,13 +16,15 @@
         user-select: none;
         -webkit-user-select: none;
       }
-      body {
+      html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
         background-color: #050508;
         color: #e2d9c8;
-        font-family: 'Cinzel', 'Trajan Pro', 'Georgia', serif;
+        font-family: 'Noto Sans KR', 'Cinzel', 'Segoe UI', sans-serif;
         overflow: hidden;
-        width: 100vw;
-        height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -35,6 +40,8 @@
         box-shadow: 0 0 35px rgba(0, 0, 0, 0.9), 0 0 10px rgba(160, 40, 40, 0.3);
         image-rendering: pixelated;
         image-rendering: crisp-edges;
+        max-width: 100vw;
+        max-height: 100vh;
       }
     </style>
   </head>

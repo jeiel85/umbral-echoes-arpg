@@ -16,6 +16,7 @@ async function runTest() {
     '--headless=new',
     '--window-size=1280,720',
     '--disable-gpu',
+    '--incognito',
     'http://localhost:3000/',
   ]);
 
@@ -85,8 +86,12 @@ async function runTest() {
     });
   }
 
+  await send('Network.enable');
+  await send('Network.setCacheDisabled', { cacheDisabled: true });
   await send('Runtime.enable');
   await send('Page.enable');
+  await send('Page.reload', { ignoreCache: true });
+  await sleep(1500);
 
   async function evalExpr(expression) {
     const trimmed = expression.trim();
@@ -162,7 +167,7 @@ async function runTest() {
     })
   `);
   console.log('GameScene Town State:', gameSceneInfo);
-  if (gameSceneInfo.areaName !== 'Oakhaven Refuge' || !gameSceneInfo.isTown) {
+  if (!gameSceneInfo.areaName.includes('Oakhaven Refuge') || !gameSceneInfo.isTown) {
     throw new Error('Player did not start in Oakhaven Refuge!');
   }
   await captureScreenshot('screenshot_town.png');
@@ -180,22 +185,29 @@ async function runTest() {
   await evalExpr(`window.game.scene.getScene('GameScene').inventoryUI.close()`);
 
   // Open Character Sheet
-  await evalExpr(`window.game.scene.getScene('GameScene').characterUI.toggle()`);
+  await evalExpr(`
+    const gs = window.game.scene.getScene('GameScene');
+    gs.characterUI.toggle();
+  `);
   await sleep(400);
   const charOpen = await evalExpr(`window.game.scene.getScene('GameScene').characterUI.visible`);
   console.log('Character Sheet Visible:', charOpen);
   if (!charOpen) throw new Error('Character UI did not open');
+  await captureScreenshot('screenshot_character_sheet.png');
   await evalExpr(`window.game.scene.getScene('GameScene').characterUI.close()`);
 
   // Open Skill Tree
-  await evalExpr(`window.game.scene.getScene('GameScene').skillTreeUI.toggle()`);
+  await evalExpr(`
+    const gs = window.game.scene.getScene('GameScene');
+    gs.skillTreeUI.toggle();
+  `);
   await sleep(400);
   const skillOpen = await evalExpr(`window.game.scene.getScene('GameScene').skillTreeUI.visible`);
   console.log('Skill Tree Visible:', skillOpen);
   if (!skillOpen) throw new Error('Skill Tree UI did not open');
   await evalExpr(`window.game.scene.getScene('GameScene').skillTreeUI.close()`);
 
-  console.log('\n--- Step 5: Step Through Portal into Ashen Outskirts ---');
+  console.log('\n--- Step 5: Transition to Combat Field (Ashen Outskirts) ---');
   await evalExpr(`
     const gs = window.game.scene.getScene('GameScene');
     gs.loadArea('outskirts', 100, 380);
@@ -211,7 +223,7 @@ async function runTest() {
     })
   `);
   console.log('Combat Field State:', combatFieldInfo);
-  if (combatFieldInfo.areaName !== 'Ashen Outskirts' || combatFieldInfo.enemiesCount === 0) {
+  if (!combatFieldInfo.areaName.includes('Ashen Outskirts') || combatFieldInfo.enemiesCount === 0) {
     throw new Error('Outskirts did not load enemies!');
   }
   await captureScreenshot('screenshot_combat_field.png');

@@ -28,9 +28,9 @@ export class CharacterSelectScene extends Phaser.Scene {
     overlay.fillRect(0, 0, W, H);
 
     // Title
-    const title = this.add.text(W / 2, 70, 'CHOOSE YOUR CRUSADER', {
-      fontFamily: 'serif',
-      fontSize: '36px',
+    const title = this.add.text(W / 2, 65, '영웅 선택 (CHOOSE YOUR HERO)', {
+      fontFamily: "'Cinzel', 'Noto Sans KR', serif",
+      fontSize: '32px',
       fontStyle: 'bold',
       color: '#fbbf24',
       stroke: '#000',
@@ -38,9 +38,9 @@ export class CharacterSelectScene extends Phaser.Scene {
     });
     title.setOrigin(0.5, 0.5);
 
-    const subtitle = this.add.text(W / 2, 115, 'Select a hero to brave the corruption of the Forsaken Depths', {
-      fontFamily: 'serif',
-      fontSize: '15px',
+    const subtitle = this.add.text(W / 2, 105, '심연의 어둠에 맞설 당신의 영웅을 선택하십시오', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '14px',
       color: '#94a3b8',
     });
     subtitle.setOrigin(0.5, 0.5);
@@ -50,19 +50,19 @@ export class CharacterSelectScene extends Phaser.Scene {
       W / 2 - 250,
       360,
       'vanguard',
-      'VANGUARD',
-      'The Iron Sentinel',
+      '선봉장 (VANGUARD)',
+      '강철의 수호자 (The Iron Sentinel)',
       'char_vanguard',
       [
-        'Role: Melee Juggernaut',
-        'Resource: Fury (Gained in combat)',
-        'Weapon: Two-Handed Greatsword',
-        'Traits: High Armor, Cleaving Arcs,',
-        'Leap Stomps & Whirlwind Carnage',
+        '역할: 강력한 근접 전사',
+        '전투 자원: 분노 (공격/피격 시 충전)',
+        '주 무기: 대검 & 판금 갑옷',
+        '특징: 높은 생명력, 강력한 베기,',
+        '도약 분쇄 및 휠윈드 광역 섬멸',
         '',
-        'Starting Skills:',
-        '• Cleave (Sweeping Frontal Slash)',
-        '• Seismic Slam (Earth-Shattering Stun)',
+        '기본 보유 스킬:',
+        '• 휩쓸기 (Cleave) - 전방 베기',
+        '• 대지 강타 (Seismic Slam) - 광역 기절',
       ]
     );
 
@@ -71,28 +71,28 @@ export class CharacterSelectScene extends Phaser.Scene {
       W / 2 + 250,
       360,
       'arcanist',
-      'ARCANIST',
-      'The Umbral Weaver',
+      '비전술사 (ARCANIST)',
+      '그림자 직조자 (The Umbral Weaver)',
       'char_arcanist',
       [
-        'Role: Ranged Sorcerer',
-        'Resource: Mana (Rapid regeneration)',
-        'Weapon: Ancient Bone Staff',
-        'Traits: Piercing Bolts, Freezing Novas,',
-        'Cataclysm Meteors & Void Blinks',
+        '역할: 원거리 원소 마법사',
+        '전투 자원: 마나 (빠른 자동 회복)',
+        '주 무기: 고대 지팡이 & 주문서',
+        '특징: 관통 마법창, 빙결 고리,',
+        '파멸의 운석 낙하 및 차원 도약',
         '',
-        'Starting Skills:',
-        '• Arcane Bolt (Piercing Magic Spear)',
-        '• Glacial Nova (Radial Freezing Ring)',
+        '기본 보유 스킬:',
+        '• 비전 화살 (Arcane Bolt) - 관통 창',
+        '• 빙결 고리 (Glacial Nova) - 광역 동결',
       ]
     );
 
     this.selectClass('vanguard');
 
     // Embark Button
-    this.embarkBtn = this.add.text(W / 2, 620, 'EMBARK INTO DARKNESS', {
-      fontFamily: 'serif',
-      fontSize: '20px',
+    this.embarkBtn = this.add.text(W / 2, 620, '어둠 속으로 출전 (EMBARK)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '18px',
       fontStyle: 'bold',
       color: '#fbbf24',
       backgroundColor: '#78350f',
@@ -117,9 +117,9 @@ export class CharacterSelectScene extends Phaser.Scene {
     });
 
     // Back Button
-    const backBtn = this.add.text(80, 50, '← BACK', {
-      fontFamily: 'serif',
-      fontSize: '15px',
+    const backBtn = this.add.text(80, 50, '◀ 뒤로 가기', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '14px',
       fontStyle: 'bold',
       color: '#9ca3af',
     });
@@ -154,8 +154,8 @@ export class CharacterSelectScene extends Phaser.Scene {
 
     // Name
     const title = this.add.text(0, -cH / 2 + 135, name, {
-      fontFamily: 'serif',
-      fontSize: '22px',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '18px',
       fontStyle: 'bold',
       color: '#f8fafc',
     });
@@ -163,8 +163,8 @@ export class CharacterSelectScene extends Phaser.Scene {
     card.add(title);
 
     const subTitle = this.add.text(0, -cH / 2 + 160, sub, {
-      fontFamily: 'serif',
-      fontSize: '13px',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '12px',
       fontStyle: 'italic',
       color: '#fbbf24',
     });
@@ -173,7 +173,7 @@ export class CharacterSelectScene extends Phaser.Scene {
 
     // Details text
     const det = this.add.text(0, -cH / 2 + 185, details.join('\n'), {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '12px',
       color: '#cbd5e1',
       align: 'center',

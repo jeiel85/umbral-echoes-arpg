@@ -28,8 +28,8 @@ export class NPC extends Phaser.GameObjects.Sprite {
     this.setDepth(20);
 
     // Interaction prompt
-    this.promptText = scene.add.text(cfg.x, cfg.y - 30, `${cfg.name}\n[Click / Space]`, {
-      fontFamily: 'serif',
+    this.promptText = scene.add.text(cfg.x, cfg.y - 30, `${cfg.name}\n[클릭 / Space 로 대화]`, {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '11px',
       color: '#fbbf24',
       stroke: '#000000',

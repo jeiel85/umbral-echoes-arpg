@@ -38,9 +38,9 @@ export class PauseMenuUI extends Phaser.GameObjects.Container {
     this.add(bg);
 
     // Title
-    const title = scene.add.text(0, -pH / 2 + 30, 'PAUSED', {
-      fontFamily: 'serif',
-      fontSize: '22px',
+    const title = scene.add.text(0, -pH / 2 + 30, '일시 정지 (PAUSED)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '20px',
       fontStyle: 'bold',
       color: '#fbbf24',
       stroke: '#000',
@@ -52,30 +52,30 @@ export class PauseMenuUI extends Phaser.GameObjects.Container {
     // Menu Buttons
     const buttons = [
       {
-        label: 'RESUME GAME',
+        label: '게임 재개 (RESUME)',
         action: () => {
           this.close();
           this.onResumeCallback();
         },
       },
       {
-        label: 'SAVE GAME',
+        label: '게임 저장 (SAVE)',
         action: () => {
           this.onSaveCallback();
-          this.saveStatusText.setText('Progress Saved to LocalStorage!');
+          this.saveStatusText.setText('게임 진행 상황이 저장되었습니다!');
           this.scene.time.delayedCall(2000, () => this.saveStatusText.setText(''));
         },
       },
       {
-        label: 'MUTE / UNMUTE SOUND',
+        label: '음향 On / Off (SOUND)',
         action: () => {
           const muted = SoundEngine.getInstance().toggleMute();
-          this.saveStatusText.setText(muted ? 'Audio Muted' : 'Audio Enabled');
+          this.saveStatusText.setText(muted ? '음향 꺼짐 (Muted)' : '음향 켜짐 (Enabled)');
           this.scene.time.delayedCall(1500, () => this.saveStatusText.setText(''));
         },
       },
       {
-        label: 'RETURN TO MAIN MENU',
+        label: '메인 메뉴로 (TITLE)',
         action: () => {
           this.close();
           this.onQuitCallback();
@@ -89,7 +89,7 @@ export class PauseMenuUI extends Phaser.GameObjects.Container {
     buttons.forEach((btn, idx) => {
       const bY = startY + idx * spacingY;
       const bText = scene.add.text(0, bY, btn.label, {
-        fontFamily: 'serif',
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
         fontSize: '14px',
         fontStyle: 'bold',
         color: '#e2e8f0',
@@ -116,7 +116,7 @@ export class PauseMenuUI extends Phaser.GameObjects.Container {
     });
 
     this.saveStatusText = scene.add.text(0, pH / 2 - 30, '', {
-      fontFamily: 'serif',
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '12px',
       color: '#4ade80',
     });

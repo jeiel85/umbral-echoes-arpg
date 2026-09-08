@@ -15,8 +15,8 @@ import { SkillId } from '../skills/SkillTypes';
 export class CombatSystem {
   private scene: Phaser.Scene;
   private player: Player;
-  private damageNumbers: DamageNumberManager;
-  private hitFeedback: HitFeedback;
+  public damageNumbers: DamageNumberManager;
+  public hitFeedback: HitFeedback;
 
   public projectiles: Phaser.Physics.Arcade.Group;
   public areaEffects: Phaser.GameObjects.Group;

@@ -21,20 +21,20 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
     const pW = 660;
     const pH = 520;
 
-    // Background
+    // Background (100% opaque)
     const bg = scene.add.graphics();
-    bg.fillStyle(0x0f1117, 0.96);
+    bg.fillStyle(0x0a0c10, 1.0);
     bg.fillRect(-pW / 2, -pH / 2, pW, pH);
-    bg.lineStyle(3, 0x473d31, 0.95);
+    bg.lineStyle(3, 0x473d31, 1.0);
     bg.strokeRect(-pW / 2, -pH / 2, pW, pH);
-    bg.lineStyle(1, 0xb45309, 0.8);
+    bg.lineStyle(1, 0xb45309, 0.9);
     bg.strokeRect(-pW / 2 + 4, -pH / 2 + 4, pW - 8, pH - 8);
     this.add(bg);
 
     // Title
-    const title = scene.add.text(0, -pH / 2 + 20, 'SKILL DISCIPLINE & MASTERIES', {
-      fontFamily: 'serif',
-      fontSize: '17px',
+    const title = scene.add.text(0, -pH / 2 + 20, '스킬 및 전문화 (SKILL TREE & MASTERIES)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '16px',
       fontStyle: 'bold',
       color: '#fbbf24',
       stroke: '#000',
@@ -44,9 +44,10 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
     this.add(title);
 
     // Points display
-    this.pointsText = scene.add.text(0, -pH / 2 + 45, 'Skill Points Available: 0', {
-      fontFamily: 'serif',
+    this.pointsText = scene.add.text(0, -pH / 2 + 45, '사용 가능한 스킬 포인트: 0 P', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
       fontSize: '13px',
+      fontStyle: 'bold',
       color: '#a855f7',
       stroke: '#000',
       strokeThickness: 2,
@@ -73,7 +74,7 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
 
   public refresh() {
     this.skillEntriesContainer.removeAll(true);
-    this.pointsText.setText(`Skill Points Available: ${this.player.skillManager.skillPoints}`);
+    this.pointsText.setText(`사용 가능한 스킬 포인트: ${this.player.skillManager.skillPoints} P`);
 
     const classSkills = Object.values(SKILL_DEFINITIONS).filter((s) => s.className === this.player.className);
     const startY = -180;
@@ -93,9 +94,9 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
       const nameText = this.scene.add.text(
         -250,
         y - 12,
-        `${skill.name} ${skill.isPassive ? '(Passive)' : ''} - Req Lv.${skill.requiredLevel}`,
+        `${skill.name} ${skill.isPassive ? '(지속 효과)' : ''} - 요구 Lv.${skill.requiredLevel}`,
         {
-          fontFamily: 'serif',
+          fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
           fontSize: '13px',
           fontStyle: 'bold',
           color: titleColor,
@@ -104,9 +105,9 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
       this.skillEntriesContainer.add(nameText);
 
       // Description
-      const descText = this.scene.add.text(-250, y + 4, skill.tooltipText, {
-        fontFamily: 'sans-serif',
-        fontSize: '10px',
+      const descText = this.scene.add.text(-250, y + 5, skill.tooltipText, {
+        fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+        fontSize: '11px',
         color: '#9ca3af',
       });
       this.skillEntriesContainer.add(descText);
@@ -114,9 +115,9 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
       // Learn button / Learned label / Hotbar assign
       if (isUnlocked) {
         if (skill.isPassive) {
-          const learned = this.scene.add.text(230, y - 6, 'ACTIVE', {
-            fontFamily: 'serif',
-            fontSize: '12px',
+          const learned = this.scene.add.text(230, y - 6, '[ 활성화됨 ]', {
+            fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+            fontSize: '11px',
             color: '#4ade80',
           });
           this.skillEntriesContainer.add(learned);
@@ -125,13 +126,13 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
           const currentSlot = (Object.keys(this.player.skillManager.slots) as SkillSlot[]).find(
             (k) => this.player.skillManager.slots[k] === skill.id
           );
-          const btnLabel = currentSlot ? `[Slot: ${currentSlot.toUpperCase()}]` : '[Assign]';
-          const assignBtn = this.scene.add.text(200, y - 6, btnLabel, {
-            fontFamily: 'serif',
+          const btnLabel = currentSlot ? `[슬롯: ${currentSlot.toUpperCase()}]` : '[슬롯 장착]';
+          const assignBtn = this.scene.add.text(190, y - 6, btnLabel, {
+            fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
             fontSize: '11px',
             color: '#38bdf8',
             backgroundColor: '#1f2937',
-            padding: { x: 5, y: 3 },
+            padding: { x: 6, y: 3 },
           });
           assignBtn.setInteractive({ useHandCursor: true });
           assignBtn.on('pointerdown', () => {
@@ -142,9 +143,9 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
           this.skillEntriesContainer.add(assignBtn);
         }
       } else if (canLearn) {
-        const learnBtn = this.scene.add.text(220, y - 6, 'LEARN', {
-          fontFamily: 'serif',
-          fontSize: '12px',
+        const learnBtn = this.scene.add.text(210, y - 6, '[ 스킬 습득 ]', {
+          fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+          fontSize: '11px',
           fontStyle: 'bold',
           color: '#fbbf24',
           backgroundColor: '#92400e',
@@ -159,9 +160,9 @@ export class SkillTreeUI extends Phaser.GameObjects.Container {
         });
         this.skillEntriesContainer.add(learnBtn);
       } else {
-        const lockedText = this.scene.add.text(220, y - 6, `Lv.${skill.requiredLevel}`, {
-          fontFamily: 'serif',
-          fontSize: '12px',
+        const lockedText = this.scene.add.text(215, y - 6, `요구 Lv.${skill.requiredLevel}`, {
+          fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+          fontSize: '11px',
           color: '#6b7280',
         });
         this.skillEntriesContainer.add(lockedText);

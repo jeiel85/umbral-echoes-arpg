@@ -100,9 +100,9 @@ export class GameScene extends Phaser.Scene {
     // 7. UI Components
     this.initUI();
 
-    // 8. Camera follow
+    // 8. Camera follow (1:1 zoom to avoid clipping HUD)
     this.cameras.main.startFollow(this.player, true, 0.08, 0.08);
-    this.cameras.main.setZoom(1.15);
+    this.cameras.main.setZoom(1.0);
 
     // 9. Input & Combat bindings
     this.initInput();
@@ -306,6 +306,16 @@ export class GameScene extends Phaser.Scene {
       if (drop.active && drop.item) {
         const added = this.player.inventory.addItem(drop.item);
         if (added) {
+          if (drop.item.type === 'gold') {
+            this.combatSystem.damageNumbers.show(this.player.x, this.player.y, `+${drop.item.value} G`, 'heal');
+          } else {
+            this.combatSystem.damageNumbers.show(
+              this.player.x,
+              this.player.y,
+              `[${drop.item.name}]`,
+              drop.item.rarity === 'legendary' ? 'crit' : 'normal'
+            );
+          }
           if (drop.item.rarity === 'legendary') this.totalLegendariesFound++;
           drop.destroy();
         }
@@ -316,22 +326,22 @@ export class GameScene extends Phaser.Scene {
     if (area.isTown) {
       const smith = new NPC(this, {
         type: 'blacksmith',
-        name: 'Valerius the Ironbound',
-        title: 'Master Weaponsmith',
+        name: '대장장이 브론 (Vorn)',
+        title: '장비 및 무기 상인',
         x: 300,
         y: 280,
       });
       const alchemist = new NPC(this, {
         type: 'alchemist',
-        name: 'Mara of the Low Bog',
-        title: 'Alchemist & Apothecary',
+        name: '연금술사 엘레나 (Elena)',
+        title: '물약 및 비약 상인',
         x: 700,
         y: 280,
       });
       const elder = new NPC(this, {
         type: 'elder',
-        name: 'Elder Corvus',
-        title: 'Keeper of the Old Order',
+        name: '장로 코르부스 (Corvus)',
+        title: '안식처의 수호자',
         x: 500,
         y: 220,
       });
@@ -545,9 +555,9 @@ export class GameScene extends Phaser.Scene {
     overlay.fillStyle(0x3b0707, 0.7);
     overlay.fillRect(0, 0, W, H);
 
-    const deathText = this.add.text(W / 2, H / 2 - 40, 'YOU HAVE FALLEN', {
-      fontFamily: 'serif',
-      fontSize: '44px',
+    const deathText = this.add.text(W / 2, H / 2 - 40, '사망하셨습니다 (YOU HAVE FALLEN)', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '36px',
       fontStyle: 'bold',
       color: '#ef4444',
       stroke: '#000',
@@ -557,18 +567,20 @@ export class GameScene extends Phaser.Scene {
     deathText.setDepth(601);
     deathText.setScrollFactor(0);
 
-    const subText = this.add.text(W / 2, H / 2 + 15, 'Your soul crawls back to the sanctuary of Oakhaven Refuge...', {
-      fontFamily: 'serif',
-      fontSize: '16px',
+    const subText = this.add.text(W / 2, H / 2 + 15, '당신의 영혼이 잿빛 안식처의 제단으로 귀환합니다...', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '15px',
       color: '#e2e8f0',
+      stroke: '#000',
+      strokeThickness: 2,
     });
     subText.setOrigin(0.5, 0.5);
     subText.setDepth(601);
     subText.setScrollFactor(0);
 
-    const respawnBtn = this.add.text(W / 2, H / 2 + 75, '[ RESPAWN IN TOWN ]', {
-      fontFamily: 'serif',
-      fontSize: '18px',
+    const respawnBtn = this.add.text(W / 2, H / 2 + 75, '[ 마을에서 부활하기 (RESPAWN) ]', {
+      fontFamily: "'Noto Sans KR', 'Segoe UI', sans-serif",
+      fontSize: '16px',
       fontStyle: 'bold',
       color: '#fbbf24',
       backgroundColor: '#78350f',
