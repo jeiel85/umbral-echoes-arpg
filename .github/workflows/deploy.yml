@@ -1,25 +1,22 @@
 name: Deploy to GitHub Pages
 
+# Pages 소스는 gh-pages 브랜치(legacy)이고 github-pages 환경은 gh-pages 브랜치만 허용한다.
+# 그래서 Actions 배포(deploy-pages) 대신 main 빌드 결과(dist/)를 gh-pages 브랜치에 커밋해 배포한다.
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   workflow_dispatch:
 
 permissions:
-  contents: read
-  pages: write
-  id-token: write
+  contents: write
 
 concurrency:
-  group: 'pages'
-  cancel-in-progress: true
+  group: pages
+  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -29,7 +26,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -37,14 +34,18 @@ jobs:
       - name: Build
         run: npm run build
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: './dist'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Publish dist/ to gh-pages
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git fetch --depth=1 origin gh-pages
+          git worktree add -B gh-pages "$RUNNER_TEMP/site" origin/gh-pages
+          rsync -a --delete --exclude .git dist/ "$RUNNER_TEMP/site/"
+          cd "$RUNNER_TEMP/site"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "gh-pages already matches this build"
+            exit 0
+          fi
+          git commit -m "deploy: main ${GITHUB_SHA::7}"
+          git push origin gh-pages
