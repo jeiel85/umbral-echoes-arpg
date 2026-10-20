@@ -11,6 +11,11 @@ export class MainMenuScene extends Phaser.Scene {
     const W = 1280;
     const H = 720;
 
+    // GitHub repository link (DOM) is visible only on the main menu.
+    const repoLink = document.getElementById('repo-link');
+    repoLink?.classList.add('visible');
+    this.events.once(Phaser.Scenes.Events.SHUTDOWN, () => repoLink?.classList.remove('visible'));
+
     // Start dark ambient drone
     SoundEngine.getInstance().startAmbience();
 
