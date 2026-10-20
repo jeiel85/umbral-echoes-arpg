@@ -43,9 +43,6 @@ jobs:
           rsync -a --delete --exclude .git dist/ "$RUNNER_TEMP/site/"
           cd "$RUNNER_TEMP/site"
           git add -A
-          if git diff --cached --quiet; then
-            echo "gh-pages already matches this build"
-            exit 0
-          fi
-          git commit -m "deploy: main ${GITHUB_SHA::7}"
+          # 내용이 같아도 커밋해 gh-pages에 배포된 main 커밋을 남기고 Pages 빌드를 트리거한다.
+          git commit --allow-empty -m "deploy: main ${GITHUB_SHA::7}"
           git push origin gh-pages
